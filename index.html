@@ -100,24 +100,26 @@
 
     <!-- 🔹 JavaScript to Fetch Websites & Handle Form -->
     <script>
-        // Load Websites from JSON
-        fetch("websites.json")
-            .then(response => response.json())
-            .then(data => {
-                let tableBody = document.getElementById("websiteTable");
-                tableBody.innerHTML = "";
-                data.forEach((site, index) => {
-                    let row = `<tr>
-                        <td>${index + 1}</td>
-                        <td>${site.name}</td>
-                        <td>${site.category}</td>
-                        <td>${site.description}</td>
-                        <td><a href="${site.url}" target="_blank">Visit</a></td>
-                    </tr>`;
-                    tableBody.innerHTML += row;
-                });
-            })
-            .catch(error => console.error("Error loading websites:", error));
+        fetch("https://raw.githubusercontent.com/techlabrs/usefull-websites/main/websites.json")
+    .then(response => response.json())
+    .then(data => {
+        let tableBody = document.getElementById("websiteTable");
+        tableBody.innerHTML = "";  // Clear previous "Loading websites..."
+        data.forEach((site, index) => {
+            let row = `<tr>
+                <td>${index + 1}</td>
+                <td>${site.name}</td>
+                <td>${site.category}</td>
+                <td>${site.description}</td>
+                <td><a href="${site.url}" target="_blank">Visit</a></td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+    })
+    .catch(error => {
+        console.error("Error loading websites:", error);
+        document.getElementById("websiteTable").innerHTML = "<tr><td colspan='5'>Failed to load websites.</td></tr>";
+    });
 
         // Handle Form Submission
         document.getElementById("websiteForm").addEventListener("submit", function(event) {
