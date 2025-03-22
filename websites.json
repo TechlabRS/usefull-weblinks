@@ -1,0 +1,20 @@
+[
+    {
+        "name": "GitHub",
+        "url": "https://github.com",
+        "category": "Development",
+        "description": "A code hosting and version control platform."
+    },
+    {
+        "name": "Khan Academy",
+        "url": "https://www.khanacademy.org",
+        "category": "Education",
+        "description": "Free online courses on various subjects."
+    }
+    {
+          "name": "APSPDCL",
+          "url": "https://apspdcl.in/digital_payment.jsp",
+          "category": "Electricity",
+          "description": "You can pay your electricity bills for Andhra Pradesh"
+      },
+]
