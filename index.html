@@ -3,51 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Useful Websites</title>
-    <styles> </styles>
-    
+    <title>Useful Websites Directory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        form {
+            margin: 20px auto;
+            width: 50%;
+            text-align: left;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            display: block;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Useful Websites for Students, Aspirants, and Employees</h1>
+    <!-- 🔹 Project Introduction -->
+    <h1>Useful Websites Directory</h1>
+    <p>
+        This project is an open-source collection of useful websites for **students, aspirants, and employees**.  
+        The goal is to list **educational, productivity, and professional websites** that help users.  
+        You can also suggest a new website using the form below.  
+        Submissions are **manually reviewed** before they appear in the list.
+    </p>
 
-    <div class="intro">
-        <h2>About This Project</h2>
-        <p>
-            This project is an open-source collection of **useful websites** aimed at **students, aspirants, and employees**.  
-            Whether you are looking for **learning resources, job portals, coding platforms, or productivity tools**,  
-            this website lists **the most valuable websites** to help you.  
-        </p>
-        <p>
-            Since it is an **open-source project**, anyone can contribute by suggesting a website.  
-            However, all submissions will go through **manual approval** before being added to the list.  
-            You can suggest a website using the form below.
-        </p>
-    </div>
-
-    <button onclick="toggleForm()">+ Submit a Website</button>
-
-    <div id="formContainer" class="form-container" style="display: none;">
-        <h2>Submit a Website</h2>
-        <input type="text" id="name" placeholder="Website Name" required>
-        <input type="url" id="url" placeholder="Website URL" required>
-        <input type="text" id="category" placeholder="Category" required>
-        <textarea id="description" placeholder="Description (50-100 words)" required></textarea>
-        <button onclick="addWebsite()">Submit</button>
-    </div>
-
+    <!-- 🔹 Table for Listing Websites -->
+    <h2>📌 List of Websites</h2>
     <table>
         <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
+                <th>Website</th>
                 <th>Category</th>
                 <th>Description</th>
-                <th>Link</th>
+                <th>Visit</th>
             </tr>
         </thead>
-        <tbody id="websiteTable"></tbody>
+        <tbody id="websiteTable">
+            <tr><td colspan="5">Loading websites...</td></tr>
+        </tbody>
     </table>
-<script src="srcipt.js"> </script>
+
+    <!-- 🔹 Submission Form -->
+    <h2>➕ Suggest a Website</h2>
+    <form id="websiteForm">
+        <label for="name">Website Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="url">Website URL:</label>
+        <input type="url" id="url" required>
+
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="Education">Education</option>
+            <option value="Productivity">Productivity</option>
+            <option value="Programming">Programming</option>
+            <option value="Job Search">Job Search</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description" rows="3" required></textarea>
+
+        <button type="submit">Submit Website</button>
+    </form>
+
+    <!-- 🔹 JavaScript to Fetch Websites & Handle Form -->
+    <script>
+        // Load Websites from JSON
+        fetch("websites.json")
+            .then(response => response.json())
+            .then(data => {
+                let tableBody = document.getElementById("websiteTable");
+                tableBody.innerHTML = "";
+                data.forEach((site, index) => {
+                    let row = `<tr>
+                        <td>${index + 1}</td>
+                        <td>${site.name}</td>
+                        <td>${site.category}</td>
+                        <td>${site.description}</td>
+                        <td><a href="${site.url}" target="_blank">Visit</a></td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error("Error loading websites:", error));
+
+        // Handle Form Submission
+        document.getElementById("websiteForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value.trim();
+            let url = document.getElementById("url").value.trim();
+            let category = document.getElementById("category").value;
+            let description = document.getElementById("description").value.trim();
+
+            if (!name || !url || !description) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            let newWebsite = { name, url, category, description };
+            alert("Thank you! Your website suggestion has been recorded. It will be reviewed before approval.");
+
+            console.log("New Website Submission:", newWebsite);
+            // Users will need to create a Pull Request to add it manually to `websites.json`
+        });
+    </script>
+
 </body>
 </html>
