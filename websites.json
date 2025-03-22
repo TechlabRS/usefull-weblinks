@@ -16,5 +16,11 @@
           "url": "https://apspdcl.in/digital_payment.jsp",
           "category": "Electricity",
           "description": "You can pay your electricity bills for Andhra Pradesh"
-      }
+      },
+    {
+  "name": "Flipkart",
+  "url": "https://www.flipkart.com",
+  "category": "Productivity",
+  "description": "Online shopping website."
+    }
 ]
