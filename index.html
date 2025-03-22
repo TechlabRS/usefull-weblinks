@@ -123,24 +123,37 @@
 
         // Handle Form Submission
         document.getElementById("websiteForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+    event.preventDefault();
 
-            let name = document.getElementById("name").value.trim();
-            let url = document.getElementById("url").value.trim();
-            let category = document.getElementById("category").value;
-            let description = document.getElementById("description").value.trim();
+    let name = document.getElementById("name").value.trim();
+    let url = document.getElementById("url").value.trim();
+    let category = document.getElementById("category").value;
+    let description = document.getElementById("description").value.trim();
 
-            if (!name || !url || !description) {
-                alert("Please fill in all fields.");
-                return;
-            }
+    if (!name || !url || !description) {
+        alert("Please fill in all fields.");
+        return;
+    }
 
-            let newWebsite = { name, url, category, description };
-            alert("Thank you! Your website suggestion has been recorded. It will be reviewed before approval.");
+    let newWebsite = { name, url, category, description };
 
-            console.log("New Website Submission:", newWebsite);
-            // Users will need to create a Pull Request to add it manually to `websites.json`
-        });
+    // Show PR submission instructions
+    let prInstructions = `
+        <h3>📌 Submit Your Website as a Pull Request</h3>
+        <p>To add your website, follow these steps:</p>
+        <ol>
+            <li>Go to <a href="https://github.com/techlabrs/usefull-websites/blob/main/websites.json" target="_blank">websites.json on GitHub</a>.</li>
+            <li>Click "Edit (✏️)" and add the following JSON snippet inside the array:</li>
+        </ol>
+        <pre style="background:#eee;padding:10px;border-radius:5px;">${JSON.stringify(newWebsite, null, 2)}</pre>
+        <ol start="3">
+            <li>Click "Commit changes" and create a **Pull Request (PR)**.</li>
+            <li>Once approved, your website will be listed!</li>
+        </ol>
+    `;
+
+    document.getElementById("websiteForm").innerHTML = prInstructions;
+});
     </script>
 
 </body>
