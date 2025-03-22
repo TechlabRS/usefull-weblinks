@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useful Websites</title>
+    <styles> </styles>
+    
+</head>
+<body>
+
+    <h1>Useful Websites for Students, Aspirants, and Employees</h1>
+
+    <div class="intro">
+        <h2>About This Project</h2>
+        <p>
+            This project is an open-source collection of **useful websites** aimed at **students, aspirants, and employees**.  
+            Whether you are looking for **learning resources, job portals, coding platforms, or productivity tools**,  
+            this website lists **the most valuable websites** to help you.  
+        </p>
+        <p>
+            Since it is an **open-source project**, anyone can contribute by suggesting a website.  
+            However, all submissions will go through **manual approval** before being added to the list.  
+            You can suggest a website using the form below.
+        </p>
+    </div>
+
+    <button onclick="toggleForm()">+ Submit a Website</button>
+
+    <div id="formContainer" class="form-container" style="display: none;">
+        <h2>Submit a Website</h2>
+        <input type="text" id="name" placeholder="Website Name" required>
+        <input type="url" id="url" placeholder="Website URL" required>
+        <input type="text" id="category" placeholder="Category" required>
+        <textarea id="description" placeholder="Description (50-100 words)" required></textarea>
+        <button onclick="addWebsite()">Submit</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody id="websiteTable"></tbody>
+    </table>
+<script src="srcipt.js"> </script>
+</body>
+</html>
